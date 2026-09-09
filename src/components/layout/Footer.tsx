@@ -25,11 +25,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-white/10">
           {/* Brand & Overview Column */}
           <div className="lg:col-span-4 space-y-6">
-            <Link to="/" className="inline-block">
+            <Link
+              to="/"
+              className="inline-block bg-white px-3.5 py-2 rounded-xl shadow-sm hover:opacity-95 transition-opacity"
+            >
               <img
                 src="/assets/images/logo.png"
-                alt="Aakar Bhumi - Shaping Land. Creating Value."
-                className="h-12 w-auto object-contain brightness-0 invert"
+                alt="AKARBHUMI Logo - Shaping Land. Creating Value."
+                className="h-10 sm:h-11 w-auto object-contain"
               />
             </Link>
 
