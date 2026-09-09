@@ -22,14 +22,14 @@ export default function UpcomingDevelopmentsPage() {
   };
 
   const whatsappInquiryUrl = getWhatsAppLink(
-    `Hello AKARBHUMI, I am registering interest for upcoming developments in ${formData.location}. Name: ${formData.name || 'Visitor'}, Purpose: ${formData.purpose}.`
+    `Hello Aakar Bhumi, I am registering interest for future developments in ${formData.location}. Name: ${formData.name || 'Visitor'}, Purpose: ${formData.purpose}.`
   );
 
   return (
     <>
       <SEO
-        title="AKARBHUMI Developments — Coming Soon"
-        description="AKARBHUMI is identifying and planning selected land development opportunities across Mangaon, Roha, Pali, and Karjat. Register your interest for future launches."
+        title="Future Plotted Developments | Aakar Bhumi"
+        description="Aakar Bhumi is identifying and planning selected land development opportunities across Mangaon, Roha, Pali, and Karjat. Register your interest for future launches."
       />
 
       <main className="w-full pt-24 sm:pt-28">
@@ -39,13 +39,13 @@ export default function UpcomingDevelopmentsPage() {
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#163828] text-[#86EFAC] text-xs font-bold tracking-widest uppercase mb-4">
                 <Sparkles className="w-3.5 h-3.5" />
-                Coming Soon
+                <span>Planned Vision</span>
               </div>
               <h1 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#163828] leading-[1.08]">
-                AKARBHUMI Developments
+                Future Plotted Developments
               </h1>
               <p className="mt-6 text-lg sm:text-xl text-[#57685D] leading-relaxed">
-                AKARBHUMI is identifying and planning selected land development opportunities across emerging destinations in Western Maharashtra.
+                Aakar Bhumi is identifying and planning selected land development opportunities across emerging growth corridors in Western Maharashtra.
               </p>
             </div>
           </div>
@@ -62,11 +62,11 @@ export default function UpcomingDevelopmentsPage() {
                 </h2>
 
                 <p className="text-base sm:text-lg text-[#57685D] leading-relaxed">
-                  Our upcoming developments will focus on organised plotting, clear accessibility, natural surroundings, and thoughtful land planning.
+                  Our upcoming master-planned plotted developments will focus on organized layout structuring, clear registered road access, natural surroundings, and statutory title clarity.
                 </p>
 
                 <p className="text-base sm:text-lg text-[#57685D] leading-relaxed">
-                  Our first AKARBHUMI developments will be announced soon. Every upcoming layout is subjected to extensive cadastral surveying, title vetting, and regulatory alignment prior to release.
+                  Every future layout is subjected to extensive cadastral surveying, 30-year title vetting, and statutory NA regulatory alignment prior to official release.
                 </p>
 
                 {/* Planned Standards List */}
@@ -75,7 +75,7 @@ export default function UpcomingDevelopmentsPage() {
                     <Layers className="w-5 h-5 text-[#163828] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-[#163828]">Organised Master Planning</h4>
-                      <p className="text-xs text-[#57685D] mt-0.5">Demarcated boundaries, internal road systems, and open green zones.</p>
+                      <p className="text-xs text-[#57685D] mt-0.5">Demarcated boundaries, internal paved roads, and open green zones.</p>
                     </div>
                   </div>
 
@@ -83,7 +83,7 @@ export default function UpcomingDevelopmentsPage() {
                     <ShieldCheck className="w-5 h-5 text-[#163828] shrink-0 mt-0.5" />
                     <div>
                       <h4 className="text-sm font-bold text-[#163828]">Statutory Title Clarity</h4>
-                      <p className="text-xs text-[#57685D] mt-0.5">Unencumbered freehold ownership backed by 30-year legal searches.</p>
+                      <p className="text-xs text-[#57685D] mt-0.5">Unencumbered freehold ownership with individualized 7/12 extract / Property Card allocations.</p>
                     </div>
                   </div>
 
@@ -107,7 +107,7 @@ export default function UpcomingDevelopmentsPage() {
                     Register Your Interest
                   </h3>
                   <p className="text-xs sm:text-sm text-[#57685D] mt-1">
-                    Receive early notifications and research briefings as new land opportunities are finalized.
+                    Receive early research briefings and priority intimation as new land opportunities are finalized.
                   </p>
                 </div>
 
@@ -118,7 +118,7 @@ export default function UpcomingDevelopmentsPage() {
                     </div>
                     <h4 className="text-2xl font-bold text-[#163828]">Registration Received</h4>
                     <p className="text-xs sm:text-sm text-[#57685D] max-w-sm mx-auto leading-relaxed">
-                      Thank you for registering with AKARBHUMI. Our advisory desk will provide priority announcements as soon as official developments are published.
+                      Thank you for registering with Aakar Bhumi. Our advisory desk will provide priority announcements as soon as official developments are published.
                     </p>
                     <a
                       href={whatsappInquiryUrl}
@@ -127,7 +127,7 @@ export default function UpcomingDevelopmentsPage() {
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white text-xs font-bold shadow-md hover:bg-[#1EBE5B] transition-all mt-4"
                     >
                       <MessageCircle className="w-4 h-4" />
-                      Connect on WhatsApp
+                      <span>Connect on WhatsApp</span>
                     </a>
                   </div>
                 ) : (
@@ -177,24 +177,24 @@ export default function UpcomingDevelopmentsPage() {
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
                         <label className="block text-xs font-semibold text-[#163828] mb-1">
-                          Preferred Location
+                          Preferred Growth Corridor
                         </label>
                         <select
                           value={formData.location}
                           onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                           className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
                         >
-                          <option value="Mangaon">Mangaon</option>
-                          <option value="Roha">Roha</option>
-                          <option value="Pali">Pali</option>
-                          <option value="Karjat">Karjat</option>
+                          <option value="Mangaon">Mangaon (NH 66)</option>
+                          <option value="Roha">Roha (Kundalika Basin)</option>
+                          <option value="Pali">Pali (Khopoli-Pali Highway)</option>
+                          <option value="Karjat">Karjat (Suburban Belt)</option>
                           <option value="Other">Other Region</option>
                         </select>
                       </div>
 
                       <div>
                         <label className="block text-xs font-semibold text-[#163828] mb-1">
-                          Approximate Budget
+                          Approximate Budget Context
                         </label>
                         <select
                           value={formData.budget}
@@ -219,9 +219,9 @@ export default function UpcomingDevelopmentsPage() {
                         className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
                       >
                         <option value="Long-Term Land Holding">Long-Term Land Holding</option>
-                        <option value="Farmhouse">Farmhouse</option>
+                        <option value="Farmhouse / Countryside Living">Farmhouse / Countryside Living</option>
                         <option value="Second Home">Second Home</option>
-                        <option value="Investment">Investment</option>
+                        <option value="Agricultural Cultivation">Agricultural Cultivation</option>
                       </select>
                     </div>
 
@@ -240,10 +240,10 @@ export default function UpcomingDevelopmentsPage() {
 
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#163828] text-white font-bold text-sm hover:bg-[#0E241A] transition-all shadow-md"
+                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-[#163828] text-white font-bold text-sm hover:bg-[#0E241A] transition-all shadow-md cursor-pointer"
                     >
                       <Send className="w-4 h-4" />
-                      Register Your Interest
+                      <span>Register Your Interest</span>
                     </button>
                   </form>
                 )}

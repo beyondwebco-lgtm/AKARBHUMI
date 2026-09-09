@@ -2,53 +2,75 @@ import React, { useState } from 'react';
 import SEO from '../components/common/SEO';
 import Hero from '../components/home/Hero';
 import EditorialStatement from '../components/home/EditorialStatement';
-import WhyLandSection from '../components/home/WhyLandSection';
+import ServicesSection from '../components/home/ServicesSection';
+import BeforeYouBuySection from '../components/home/BeforeYouBuySection';
+import WhyAakarBhumiSection from '../components/home/WhyAakarBhumiSection';
+import OurProcessSection from '../components/home/OurProcessSection';
+import AgricultureIncomeSection from '../components/home/AgricultureIncomeSection';
 import FocusLocationsPreview from '../components/home/FocusLocationsPreview';
-import ConnectivitySection from '../components/home/ConnectivitySection';
 import LandInsightsPreview from '../components/home/LandInsightsPreview';
-import UpcomingDevelopmentsPreview from '../components/home/UpcomingDevelopmentsPreview';
+import FutureDevelopmentNotice from '../components/home/FutureDevelopmentNotice';
 import FinalCTA from '../components/home/FinalCTA';
 import ContactModal from '../components/common/ContactModal';
 
 export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedService, setSelectedService] = useState<string | undefined>();
+
+  const handleOpenConsultation = (serviceName?: string) => {
+    setSelectedService(serviceName);
+    setIsModalOpen(true);
+  };
 
   return (
     <>
       <SEO
-        title="Shape Your Future With Land"
-        description="AKARBHUMI is a trusted platform for land information, location insights and future land development opportunities in Mangaon, Roha, Pali, and Karjat."
+        title="Aakar Bhumi | Land Consultation & Land Advisory"
+        description="Expert land consultation for buying, investing, developing, and creating long-term value from land across emerging growth corridors in Western Maharashtra."
       />
 
       <main className="w-full">
-        {/* 1. Cinematic Hero */}
-        <Hero onOpenEnquiry={() => setIsModalOpen(true)} />
+        {/* 1. HERO */}
+        <Hero onOpenConsultation={() => handleOpenConsultation()} />
 
-        {/* 2. Editorial Statement */}
+        {/* 2. BRAND STATEMENT & 4 LAND QUADRANTS */}
         <EditorialStatement />
 
-        {/* 3. Why Land */}
-        <WhyLandSection />
+        {/* 3. CORE SERVICES */}
+        <ServicesSection onOpenConsultation={handleOpenConsultation} />
 
-        {/* 4. Focus Locations */}
+        {/* 4. BEFORE YOU BUY LAND */}
+        <BeforeYouBuySection />
+
+        {/* 5. WHY AAKAR BHUMI? */}
+        <WhyAakarBhumiSection />
+
+        {/* 6. OUR PROCESS */}
+        <OurProcessSection />
+
+        {/* 7. AGRICULTURE / LAND INCOME */}
+        <AgricultureIncomeSection />
+
+        {/* 8. FOCUS LOCATIONS CONTEXT */}
         <FocusLocationsPreview />
 
-        {/* 5. Connectivity Framework */}
-        <ConnectivitySection />
-
-        {/* 6. Land Insights / Knowledge Centre Preview */}
+        {/* 9. INSIGHTS & KNOWLEDGE PREVIEW */}
         <LandInsightsPreview />
 
-        {/* 7. Upcoming Developments (Coming Soon) */}
-        <UpcomingDevelopmentsPreview onOpenRegister={() => setIsModalOpen(true)} />
+        {/* 10. FUTURE-READY DEVELOPMENT MESSAGE */}
+        <FutureDevelopmentNotice onOpenConsultation={() => handleOpenConsultation('Future Plotted Opportunities')} />
 
-        {/* 8. Final Deep Green CTA */}
-        <FinalCTA onOpenEnquiry={() => setIsModalOpen(true)} />
+        {/* 11. FINAL CONSULTATION CTA */}
+        <FinalCTA onOpenEnquiry={() => handleOpenConsultation()} />
       </main>
 
       <ContactModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedService(undefined);
+        }}
+        prefilledService={selectedService}
       />
     </>
   );

@@ -23,6 +23,19 @@ export interface LocationItem {
   };
 }
 
+export interface ServiceItem {
+  id: string;
+  number: string;
+  title: string;
+  shortTagline: string;
+  description: string;
+  longDescription: string;
+  keyAspects: string[];
+  deliverables: string[];
+  iconName: string;
+  idealFor: string;
+}
+
 export interface ArticleItem {
   id: string;
   slug: string;
@@ -44,6 +57,39 @@ export interface ArticleItem {
   }[];
   tags: string[];
   relatedSlugs: string[];
+}
+
+export interface ProjectArchitecture {
+  id: string;
+  slug: string;
+  name: string;
+  status: 'planned' | 'upcoming' | 'active';
+  location: {
+    region: string;
+    taluka: string;
+    district: string;
+    googleMapUrl?: string;
+  };
+  overview: string;
+  conceptSummary: string;
+  plotSizes?: string[];
+  masterPlanImage?: string;
+  amenities?: string[];
+  locationAdvantages?: string[];
+  connectivity?: {
+    highways: string;
+    transit: string;
+    airport: string;
+  };
+  gallery?: string[];
+  videoUrl?: string;
+  brochureUrl?: string;
+  pricingContext?: string;
+  statutoryInfo?: {
+    zoning: string;
+    approvalsStatus: string;
+    reraNumber?: string;
+  };
 }
 
 export interface SiteContactInfo {

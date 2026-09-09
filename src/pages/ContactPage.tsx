@@ -1,275 +1,318 @@
 import React, { useState } from 'react';
-import { MessageCircle, Mail, Phone, MapPin, Clock, Send, CheckCircle2, Compass } from 'lucide-react';
+import { 
+  MessageCircle, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Clock, 
+  Send, 
+  CheckCircle2, 
+  ShieldCheck,
+  Compass,
+  ArrowRight
+} from 'lucide-react';
 import SEO from '../components/common/SEO';
+import SectionHeading from '../components/common/SectionHeading';
 import { SITE_CONTACT, getWhatsAppLink } from '../data/siteData';
+import { SERVICES_DATA } from '../data/servicesData';
 
 export default function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
-    fullName: '',
+    name: '',
     phone: '',
     email: '',
-    location: 'Mangaon',
+    serviceRequired: 'Land Buying Consultation',
+    preferredLocation: 'Mangaon',
+    purpose: 'Investment',
     message: '',
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    setSubmitted(true);
   };
 
-  const waUrl = getWhatsAppLink(
-    `Hello AKARBHUMI, I am contacting you regarding land inquiries. Name: ${formData.fullName || 'Visitor'}.`
+  const whatsappInquiryUrl = getWhatsAppLink(
+    `Hello Aakar Bhumi, I would like to book a land consultation regarding "${formData.serviceRequired}".`
   );
 
   return (
     <>
       <SEO
-        title="Contact Us — Let’s Talk About Land"
-        description="Connect with AKARBHUMI for location insights, land intelligence, and upcoming development notifications. WhatsApp: +91 70308 71292."
+        title="Contact & Consultation Desk | Aakar Bhumi"
+        description="Book a dedicated land consultation with Aakar Bhumi. Inquire via WhatsApp, schedule an advisory discussion, or submit your land requirement."
       />
 
-      <main className="w-full pt-24 sm:pt-28">
-        {/* Header */}
+      <main className="w-full pt-24 sm:pt-28 bg-[#FBFBF9]">
+        {/* Editorial Header */}
         <section className="bg-white py-16 sm:py-24 border-b border-[#E3E8DF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF3EE] text-[#163828] text-xs font-bold tracking-widest uppercase mb-4">
-                <Compass className="w-3.5 h-3.5" />
-                Direct Communication
+            <div className="max-w-3xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBF3EE] text-[#163828] text-xs font-bold tracking-widest uppercase">
+                <Compass className="w-3.5 h-3.5 text-[#2E6A4B]" />
+                <span>Advisory Desk</span>
               </div>
               <h1 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#163828] leading-[1.08]">
-                Let’s Talk About Land
+                Connect With Our Advisory Cell.
               </h1>
-              <p className="mt-6 text-lg sm:text-xl text-[#57685D] leading-relaxed">
-                Have a location in mind? Reach out to our advisory desk for factual regional briefings, documentation guidance, and land inquiries.
+              <p className="text-lg sm:text-xl text-[#57685D] leading-relaxed font-light">
+                Whether you require documentary scrutiny, agricultural feasibility, or location potential analysis, we are here to provide clear, unbiased guidance.
               </p>
             </div>
           </div>
         </section>
 
-        {/* Contact Grid: Details + Form */}
-        <section className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-[#E3E8DF]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              {/* Left Column: Contact Cards */}
-              <div className="lg:col-span-5 space-y-6">
-                <div>
-                  <h2 className="editorial-title text-2xl sm:text-3xl font-bold text-[#163828] mb-2">
-                    Official Advisory Channels
-                  </h2>
-                  <p className="text-sm text-[#57685D]">
-                    Choose your preferred communication channel to speak directly with our team.
-                  </p>
+        {/* Main Consultation Form & Channels Grid */}
+        <section className="py-20 sm:py-28 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+            {/* Left Column: Direct Channels & Advisory Desk Info */}
+            <div className="lg:col-span-5 space-y-8">
+              <div className="space-y-4">
+                <h3 className="editorial-title text-2xl sm:text-3xl font-bold text-[#163828]">
+                  Direct Advisory Channels
+                </h3>
+                <p className="text-sm text-[#57685D] leading-relaxed">
+                  We encourage prospective land owners and investors to initiate consultation directly via WhatsApp or by scheduling a formal discussion.
+                </p>
+              </div>
+
+              {/* Priority WhatsApp Card */}
+              <div className="bg-[#122B1E] text-white rounded-3xl p-6 sm:p-8 shadow-lg border border-[#0E241A] space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#86EFAC]">
+                    Fastest Response
+                  </span>
+                  <div className="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5" />
+                  </div>
                 </div>
 
-                {/* WhatsApp Direct Card */}
-                <a
-                  href={waUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-6 rounded-2xl bg-[#163828] text-white hover:bg-[#0E241A] transition-all shadow-md group border border-white/10"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#86EFAC]">
-                      Instant WhatsApp Channel
-                    </span>
-                    <div className="w-8 h-8 rounded-full bg-[#25D366] flex items-center justify-center text-white">
-                      <MessageCircle className="w-4 h-4 fill-current" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold">{SITE_CONTACT.whatsappDisplay}</h3>
-                  <p className="text-xs text-[#D1DCD5] mt-1">
-                    Click to initiate a real-time WhatsApp conversation with AKARBHUMI.
-                  </p>
-                </a>
+                <h4 className="text-xl font-bold">Instant WhatsApp Advisory</h4>
+                <p className="text-xs sm:text-sm text-[#D1DCD5] leading-relaxed">
+                  Connect with our senior land analyst directly for preliminary questions, document inquiries, and location guidance.
+                </p>
 
-                {/* Info Cards Grid */}
-                <div className="space-y-4">
-                  {/* Email */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#E3E8DF] flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
-                      <Mail className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#57685D] uppercase tracking-wider block">
-                        Email Advisory
-                      </span>
-                      <a
-                        href={`mailto:${SITE_CONTACT.companyEmailPlaceholder}`}
-                        className="text-base font-bold text-[#163828] hover:underline"
-                      >
-                        {SITE_CONTACT.companyEmailPlaceholder}
-                      </a>
-                    </div>
-                  </div>
-
-                  {/* Phone */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#E3E8DF] flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
-                      <Phone className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#57685D] uppercase tracking-wider block">
-                        Advisory Phone
-                      </span>
-                      <p className="text-base font-bold text-[#163828]">
-                        {SITE_CONTACT.companyPhonePlaceholder}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Address */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#E3E8DF] flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
-                      <MapPin className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#57685D] uppercase tracking-wider block">
-                        Regional Location
-                      </span>
-                      <p className="text-sm font-medium text-[#163828]">
-                        {SITE_CONTACT.officeAddressPlaceholder}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Hours */}
-                  <div className="p-5 rounded-2xl bg-white border border-[#E3E8DF] flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
-                      <Clock className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-semibold text-[#57685D] uppercase tracking-wider block">
-                        Operating Hours
-                      </span>
-                      <p className="text-sm font-medium text-[#163828]">
-                        {SITE_CONTACT.businessHoursPlaceholder}
-                      </p>
-                    </div>
-                  </div>
+                <div className="pt-2">
+                  <a
+                    href={getWhatsAppLink('Hello Aakar Bhumi, I would like to book a land consultation.')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[#25D366] hover:bg-[#1EBE5B] text-white text-xs font-bold transition-all shadow-md"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Chat on WhatsApp ({SITE_CONTACT.whatsappDisplay})</span>
+                  </a>
                 </div>
               </div>
 
-              {/* Right Column: Contact Form */}
-              <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-12 border border-[#E3E8DF] shadow-xl">
-                <div className="mb-8">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#2E6A4B] block mb-1">
-                    Send Direct Message
-                  </span>
-                  <h2 className="editorial-title text-3xl font-bold text-[#163828]">
-                    Contact Form
-                  </h2>
-                  <p className="text-sm text-[#57685D] mt-1">
-                    Please provide your contact information and query details.
-                  </p>
-                </div>
-
-                {isSubmitted ? (
-                  <div className="py-12 text-center space-y-4">
-                    <div className="w-16 h-16 bg-[#EBF3EE] text-[#163828] rounded-full flex items-center justify-center mx-auto">
-                      <CheckCircle2 className="w-8 h-8" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-[#163828]">Message Sent Successfully</h3>
-                    <p className="text-sm text-[#57685D] max-w-md mx-auto leading-relaxed">
-                      Thank you for contacting AKARBHUMI. A member of our land advisory team will get in touch with you shortly.
-                    </p>
-                    <a
-                      href={waUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white text-xs font-bold shadow-md hover:bg-[#1EBE5B] transition-all mt-4"
-                    >
-                      <MessageCircle className="w-4 h-4" />
-                      Open WhatsApp Chat
+              {/* Contact Details List */}
+              <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#E3E8DF] shadow-xs space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
+                    <Phone className="w-5 h-5 text-[#2E6A4B]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#57685D]">Direct Advisory Line</p>
+                    <a href={`tel:${SITE_CONTACT.companyPhonePlaceholder.replace(/[^0-9+]/g, '')}`} className="text-sm font-bold text-[#163828] hover:text-[#2E6A4B] transition-colors">
+                      {SITE_CONTACT.companyPhonePlaceholder}
                     </a>
                   </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
+                    <Mail className="w-5 h-5 text-[#2E6A4B]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#57685D]">Advisory Email</p>
+                    <a href={`mailto:${SITE_CONTACT.companyEmailPlaceholder}`} className="text-sm font-bold text-[#163828] hover:text-[#2E6A4B] transition-colors">
+                      {SITE_CONTACT.companyEmailPlaceholder}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
+                    <MapPin className="w-5 h-5 text-[#2E6A4B]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#57685D]">Regional Presence</p>
+                    <p className="text-xs sm:text-sm text-[#163828]">{SITE_CONTACT.officeAddressPlaceholder}</p>
+                    <p className="text-[11px] text-[#57685D] mt-0.5">Mangaon • Roha • Pali • Karjat Corridor</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-[#EBF3EE] text-[#163828] flex items-center justify-center shrink-0">
+                    <Clock className="w-5 h-5 text-[#2E6A4B]" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-wider text-[#57685D]">Consultation Hours</p>
+                    <p className="text-xs sm:text-sm text-[#163828]">{SITE_CONTACT.businessHoursPlaceholder}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Consultation Booking Form */}
+            <div className="lg:col-span-7 bg-white rounded-3xl p-8 sm:p-12 border border-[#E3E8DF] shadow-md">
+              {submitted ? (
+                <div className="text-center py-12 space-y-6">
+                  <div className="w-20 h-20 bg-[#EBF3EE] text-[#2E6A4B] rounded-full flex items-center justify-center mx-auto shadow-inner">
+                    <CheckCircle2 className="w-10 h-10" />
+                  </div>
+                  <h3 className="editorial-title text-3xl font-bold text-[#163828]">
+                    Consultation Request Registered
+                  </h3>
+                  <p className="text-sm text-[#57685D] max-w-md mx-auto leading-relaxed">
+                    Thank you, <strong>{formData.name}</strong>. Our advisory cell has logged your request regarding <em>{formData.serviceRequired}</em>. A senior land analyst will review your notes and reach out shortly.
+                  </p>
+
+                  <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                    <a
+                      href={whatsappInquiryUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] text-white text-xs font-bold hover:bg-[#1EBE5B] transition-all shadow-md"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span>Continue on WhatsApp</span>
+                    </a>
+                    <button
+                      onClick={() => setSubmitted(false)}
+                      className="w-full sm:w-auto px-6 py-3.5 rounded-xl border border-[#E3E8DF] text-[#163828] text-xs font-bold hover:bg-[#F4F6F1] transition-all cursor-pointer"
+                    >
+                      Submit Another Query
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="space-y-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#2E6A4B]">
+                      Structured Inquiry
+                    </span>
+                    <h3 className="editorial-title text-2xl sm:text-3xl font-bold text-[#163828]">
+                      Request a Consultation
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#57685D]">
+                      Please complete the details below so our advisory cell can prepare relevant context prior to our discussion.
+                    </p>
+                  </div>
+
+                  <div className="space-y-4 pt-2">
                     <div>
-                      <label className="block text-xs font-semibold text-[#163828] mb-1.5">
-                        Full Name *
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                        Consultation Service Required *
                       </label>
-                      <input
-                        type="text"
-                        required
-                        placeholder="e.g. Rahul Sharma"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                      />
+                      <select
+                        value={formData.serviceRequired}
+                        onChange={(e) => setFormData({ ...formData, serviceRequired: e.target.value })}
+                        className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                      >
+                        {SERVICES_DATA.map((srv) => (
+                          <option key={srv.id} value={srv.title}>
+                            {srv.title} — {srv.shortTagline}
+                          </option>
+                        ))}
+                        <option value="General Land Advisory">General Land Advisory</option>
+                        <option value="Future Plotted Opportunities">Future Plotted Opportunities</option>
+                      </select>
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-xs font-semibold text-[#163828] mb-1.5">
-                          Mobile Number *
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                          Full Name *
                         </label>
                         <input
-                          type="tel"
+                          type="text"
                           required
-                          placeholder="+91 98765 43210"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
+                          placeholder="e.g. Vikram Mehta"
+                          value={formData.name}
+                          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-xs font-semibold text-[#163828] mb-1.5">
-                          Email Address
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                          Mobile / WhatsApp *
                         </label>
                         <input
-                          type="email"
-                          placeholder="name@example.com"
-                          value={formData.email}
-                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
+                          type="tel"
+                          required
+                          placeholder="+91 98000 00000"
+                          value={formData.phone}
+                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
                         />
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-xs font-semibold text-[#163828] mb-1.5">
-                        Preferred Location / Region of Interest
-                      </label>
-                      <select
-                        value={formData.location}
-                        onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                      >
-                        <option value="Mangaon">Mangaon (Raigad / NH 66)</option>
-                        <option value="Roha">Roha (Kundalika Valley)</option>
-                        <option value="Pali">Pali (Sudhagad Foothills)</option>
-                        <option value="Karjat">Karjat (Sahyadri Belt)</option>
-                        <option value="General Consultation">General Land Advisory Consultation</option>
-                      </select>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                          Email Address
+                        </label>
+                        <input
+                          type="email"
+                          placeholder="name@company.com"
+                          value={formData.email}
+                          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                          Regional Belt of Interest
+                        </label>
+                        <select
+                          value={formData.preferredLocation}
+                          onChange={(e) => setFormData({ ...formData, preferredLocation: e.target.value })}
+                          className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                        >
+                          <option value="Mangaon">Mangaon (NH 66 Corridor)</option>
+                          <option value="Roha">Roha (Kundalika Basin)</option>
+                          <option value="Pali">Pali (Expressway / Foothills)</option>
+                          <option value="Karjat">Karjat (Mumbai-Pune Belt)</option>
+                          <option value="General Western Maharashtra">General Western Maharashtra</option>
+                        </select>
+                      </div>
                     </div>
 
                     <div>
-                      <label className="block text-xs font-semibold text-[#163828] mb-1.5">
-                        Message / Query Details *
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                        Tell Us About Your Requirement or Parcel Details
                       </label>
                       <textarea
                         rows={4}
-                        required
-                        placeholder="Tell us about the land information or location insights you are looking for..."
+                        placeholder="Please share land size, current status, key objectives, or specific legal/revenue questions you would like evaluated..."
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all resize-none"
-                      ></textarea>
+                        className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all resize-none"
+                      />
                     </div>
+                  </div>
 
+                  <div className="pt-2 space-y-4">
                     <button
                       type="submit"
-                      className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-[#163828] text-white font-bold text-sm hover:bg-[#0E241A] transition-all shadow-md"
+                      className="w-full py-4 px-8 rounded-xl bg-[#163828] hover:bg-[#0E241A] text-white text-xs font-bold tracking-wide transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <Send className="w-4 h-4" />
-                      Send Enquiry
+                      <span>Submit Consultation Request</span>
                     </button>
-                  </form>
-                )}
-              </div>
+
+                    <div className="flex items-center justify-center gap-2 text-xs text-[#57685D]">
+                      <ShieldCheck className="w-4 h-4 text-[#2E6A4B]" />
+                      <span>Advisory-first platform. No unsolicited broker calls or spam.</span>
+                    </div>
+                  </div>
+                </form>
+              )}
             </div>
           </div>
         </section>

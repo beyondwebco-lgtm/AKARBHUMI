@@ -29,13 +29,13 @@ export default function ArticleDetailPage() {
   if (!article) {
     return (
       <div className="min-h-screen pt-32 pb-20 flex flex-col items-center justify-center text-center px-4">
-        <h1 className="text-3xl font-bold text-[#163828] mb-4">Article Not Found</h1>
+        <h1 className="text-3xl font-bold text-[#163828] mb-4">Guide Not Found</h1>
         <p className="text-[#57685D] mb-6">The requested land knowledge guide could not be located.</p>
         <Link
-          to="/land-insights"
+          to="/insights"
           className="px-6 py-3 rounded-xl bg-[#163828] text-white font-semibold text-sm hover:bg-[#0E241A] transition-all"
         >
-          Back to Knowledge Centre
+          Back to Insights
         </Link>
       </div>
     );
@@ -60,13 +60,13 @@ export default function ArticleDetailPage() {
   };
 
   const whatsappInquiryUrl = getWhatsAppLink(
-    `Hello AKARBHUMI, I am reading the article "${article.title}" and have a query regarding this topic.`
+    `Hello Aakar Bhumi, I am reading the advisory guide "${article.title}" and would like to consult on this topic.`
   );
 
   return (
     <>
       <SEO
-        title={article.title}
+        title={`${article.title} | Aakar Bhumi Insights`}
         description={article.excerpt}
       />
 
@@ -75,26 +75,26 @@ export default function ArticleDetailPage() {
         <section className="bg-white border-b border-[#E3E8DF] py-4">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
             <Link
-              to="/land-insights"
+              to="/insights"
               className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#57685D] hover:text-[#163828] transition-colors"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Knowledge Centre
+              <span>Back to Insights</span>
             </Link>
 
             <button
               onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E3E8DF] text-xs font-semibold text-[#163828] hover:bg-[#F4F6F1] transition-all"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E3E8DF] text-xs font-semibold text-[#163828] hover:bg-[#F4F6F1] transition-all cursor-pointer"
             >
               {copied ? (
                 <>
                   <Check className="w-3.5 h-3.5 text-[#2E6A4B]" />
-                  Link Copied
+                  <span>Link Copied</span>
                 </>
               ) : (
                 <>
                   <Share2 className="w-3.5 h-3.5" />
-                  Share Guide
+                  <span>Share Guide</span>
                 </>
               )}
             </button>
@@ -217,7 +217,7 @@ export default function ArticleDetailPage() {
                 Have questions about {article.title}?
               </h3>
               <p className="text-xs sm:text-sm text-[#57685D]">
-                Consult directly with our land research team via WhatsApp for personalized guidance.
+                Consult directly with our land research and documentation team for personalized guidance.
               </p>
             </div>
 
@@ -229,13 +229,13 @@ export default function ArticleDetailPage() {
                 className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-[#25D366] text-white text-xs font-bold hover:bg-[#1EBE5B] transition-all shadow-md"
               >
                 <MessageCircle className="w-4 h-4" />
-                Ask on WhatsApp
+                <span>Ask on WhatsApp</span>
               </a>
               <button
                 onClick={() => setIsModalOpen(true)}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#163828] text-white text-xs font-bold hover:bg-[#0E241A] transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-[#163828] text-white text-xs font-bold hover:bg-[#0E241A] transition-all shadow-md cursor-pointer"
               >
-                Enquire
+                Book Consultation
               </button>
             </div>
           </div>
@@ -247,13 +247,13 @@ export default function ArticleDetailPage() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between mb-10">
                 <h3 className="editorial-title text-2xl sm:text-3xl font-bold text-[#163828]">
-                  Related Land Guides
+                  Related Advisory Guides
                 </h3>
                 <Link
-                  to="/land-insights"
+                  to="/insights"
                   className="text-xs font-bold text-[#163828] hover:underline flex items-center gap-1"
                 >
-                  View All Insights
+                  <span>View All Insights</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -262,7 +262,7 @@ export default function ArticleDetailPage() {
                 {relatedArticles.map((rel) => (
                   <Link
                     key={rel.id}
-                    to={`/land-insights/${rel.slug}`}
+                    to={`/insights/${rel.slug}`}
                     className="bg-[#FBFBF9] rounded-2xl overflow-hidden border border-[#E3E8DF] hover:shadow-lg transition-all flex flex-col group p-5 space-y-3"
                   >
                     <span className="text-[11px] font-semibold text-[#2E6A4B] uppercase tracking-wider">
@@ -285,6 +285,7 @@ export default function ArticleDetailPage() {
       <ContactModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        prefilledService={article.title}
       />
     </>
   );

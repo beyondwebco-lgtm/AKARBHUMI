@@ -34,24 +34,24 @@ export default function LandInsightsPage() {
   return (
     <>
       <SEO
-        title="Land Insights & Knowledge Centre"
-        description="Comprehensive guides on 7/12 extracts, NA land conversion, title verification, plotted development rules, and land due diligence in Maharashtra."
+        title="Land Insights & Knowledge Centre | Aakar Bhumi"
+        description="Comprehensive advisory guides on 7/12 extracts, NA land conversion, title verification, plotted development rules, and land due diligence in Maharashtra."
       />
 
       <main className="w-full pt-24 sm:pt-28">
         {/* Header Banner */}
         <section className="bg-white py-16 sm:py-24 border-b border-[#E3E8DF]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#EBF3EE] text-[#163828] text-xs font-bold tracking-widest uppercase mb-4">
+            <div className="max-w-3xl space-y-4">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#EBF3EE] text-[#163828] text-xs font-bold tracking-widest uppercase">
                 <BookOpen className="w-3.5 h-3.5" />
-                Knowledge Centre
+                <span>Knowledge & Research Centre</span>
               </div>
               <h1 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#163828] leading-[1.08]">
-                Understand Land Before You Own It
+                Understand Land Before You Own It.
               </h1>
-              <p className="mt-6 text-lg sm:text-xl text-[#57685D] leading-relaxed">
-                Objective legal fundamentals, revenue record guides, and strategic insights for informed land ownership.
+              <p className="text-lg sm:text-xl text-[#57685D] leading-relaxed font-light">
+                Objective legal fundamentals, revenue record guides, and strategic insights for informed land ownership and development.
               </p>
             </div>
 
@@ -63,7 +63,7 @@ export default function LandInsightsPage() {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all ${
+                    className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                       selectedCategory === cat
                         ? 'bg-[#163828] text-white shadow-sm'
                         : 'bg-[#F4F6F1] text-[#57685D] hover:bg-[#E3E8DF] hover:text-[#163828]'
@@ -95,7 +95,7 @@ export default function LandInsightsPage() {
             {filteredArticles.length === 0 ? (
               <div className="text-center py-16 bg-white rounded-3xl border border-[#E3E8DF] p-8">
                 <BookOpen className="w-12 h-12 text-[#57685D] mx-auto mb-4 opacity-50" />
-                <h3 className="text-xl font-bold text-[#163828]">No articles found</h3>
+                <h3 className="text-xl font-bold text-[#163828]">No guides found</h3>
                 <p className="text-sm text-[#57685D] mt-1">
                   Try adjusting your search keywords or category filters.
                 </p>
@@ -104,7 +104,7 @@ export default function LandInsightsPage() {
                     setSelectedCategory('All');
                     setSearchQuery('');
                   }}
-                  className="mt-4 px-5 py-2.5 rounded-xl bg-[#163828] text-white text-xs font-semibold"
+                  className="mt-4 px-5 py-2.5 rounded-xl bg-[#163828] text-white text-xs font-semibold cursor-pointer"
                 >
                   Clear Filters
                 </button>
@@ -114,7 +114,7 @@ export default function LandInsightsPage() {
                 {filteredArticles.map((art) => (
                   <Link
                     key={art.id}
-                    to={`/land-insights/${art.slug}`}
+                    to={`/insights/${art.slug}`}
                     className="bg-white rounded-2xl overflow-hidden border border-[#E3E8DF] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group hover:-translate-y-1"
                   >
                     {/* Featured Image */}

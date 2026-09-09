@@ -12,13 +12,13 @@ export default function LandInsightsPreview() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <SectionHeading
-            badge="Knowledge Centre"
+            badge="Insights & Knowledge"
             title="Understand Land Before You Own It"
-            description="Clear, transparent, and authoritative insights covering documentation, revenue records, zoning laws, and land due diligence."
+            description="Authoritative, research-backed guides covering revenue records, 7/12 extracts, zoning laws, NA conversion, and due diligence."
           />
           <Link
-            to="/land-insights"
-            className="inline-flex items-center gap-2 text-sm font-bold text-[#163828] hover:text-[#0E241A] group shrink-0"
+            to="/insights"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#163828] hover:text-[#2E6A4B] group shrink-0"
           >
             <span>View All Insights ({ARTICLES_DATA.length})</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -30,11 +30,11 @@ export default function LandInsightsPreview() {
           {featuredArticles.map((art) => (
             <Link
               key={art.id}
-              to={`/land-insights/${art.slug}`}
+              to={`/insights/${art.slug}`}
               className="bg-white rounded-2xl overflow-hidden border border-[#E3E8DF] shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col group hover:-translate-y-1"
             >
-              {/* Image Container */}
-              <div className="relative h-48 overflow-hidden bg-[#F4F6F1]">
+              {/* Image */}
+              <div className="relative h-44 overflow-hidden bg-[#F4F6F1]">
                 <img
                   src={art.featuredImage}
                   alt={art.title}
@@ -70,7 +70,7 @@ export default function LandInsightsPreview() {
                 </div>
 
                 <div className="pt-4 mt-4 border-t border-[#E3E8DF] flex items-center justify-between text-xs font-bold text-[#163828] group-hover:text-[#2E6A4B]">
-                  <span>Read Article</span>
+                  <span>Read Guide</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>

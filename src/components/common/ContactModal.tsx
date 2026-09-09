@@ -1,205 +1,231 @@
-import React, { useState } from 'react';
-import { X, Send, MessageCircle, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, MessageCircle, Send, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
 import { SITE_CONTACT, getWhatsAppLink } from '../../data/siteData';
+import { SERVICES_DATA } from '../../data/servicesData';
 
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  prefilledService?: string;
   defaultLocation?: string;
 }
 
-export default function ContactModal({ isOpen, onClose, defaultLocation }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, prefilledService, defaultLocation }: ContactModalProps) {
+  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    location: defaultLocation || 'Mangaon',
-    purpose: 'Long-Term Land Holding',
+    serviceRequired: prefilledService || 'Land Buying Consultation',
+    preferredLocation: defaultLocation || 'Mangaon',
+    purpose: 'Investment',
     message: '',
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (prefilledService) {
+      setFormData((prev) => ({ ...prev, serviceRequired: prefilledService }));
+    }
+    if (defaultLocation) {
+      setFormData((prev) => ({ ...prev, preferredLocation: defaultLocation }));
+    }
+  }, [prefilledService, defaultLocation]);
 
   if (!isOpen) return null;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      // Keep state clean
-    }, 4000);
+    setSubmitted(true);
+  };
+
+  const resetAndClose = () => {
+    setSubmitted(false);
+    onClose();
   };
 
   const whatsappInquiryUrl = getWhatsAppLink(
-    `Hello AKARBHUMI, I am interested in exploring land opportunities in ${formData.location || 'Maharashtra'}. Name: ${formData.name || 'Visitor'}.`
+    `Hello Aakar Bhumi, I would like to book a consultation for "${formData.serviceRequired}" regarding land in ${formData.preferredLocation}.`
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-      <div 
-        className="relative w-full max-w-lg bg-[#FFFFFF] rounded-2xl shadow-2xl border border-[#E3E8DF] p-6 sm:p-8 overflow-hidden text-[#163828]"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-full text-[#57685D] hover:text-[#163828] hover:bg-[#F4F6F1] transition-colors"
-          aria-label="Close Modal"
-        >
-          <X className="w-5 h-5" />
-        </button>
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-in fade-in duration-200">
+      <div className="relative w-full max-w-xl bg-white rounded-3xl shadow-2xl overflow-hidden border border-[#E3E8DF]">
+        {/* Modal Header */}
+        <div className="bg-[#0E241A] text-white p-6 sm:p-8 relative">
+          <button
+            onClick={resetAndClose}
+            className="absolute top-6 right-6 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all cursor-pointer"
+            aria-label="Close"
+          >
+            <X className="w-5 h-5" />
+          </button>
 
-        {isSubmitted ? (
-          <div className="py-8 text-center space-y-4">
-            <div className="w-16 h-16 bg-[#EBF3EE] text-[#163828] rounded-full flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-8 h-8" />
-            </div>
-            <h3 className="text-2xl font-bold tracking-tight text-[#163828]">Thank You</h3>
-            <p className="text-[#57685D] text-sm leading-relaxed max-w-sm mx-auto">
-              Your inquiry has been received. Our land advisory team will connect with you with authentic location insights.
-            </p>
-            <div className="pt-4 flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href={whatsappInquiryUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white font-medium hover:bg-[#1EBE5B] transition-all text-sm shadow-md"
-              >
-                <MessageCircle className="w-4 h-4" />
-                Connect on WhatsApp Instantly
-              </a>
-              <button
-                onClick={onClose}
-                className="px-6 py-3 rounded-xl border border-[#E3E8DF] text-[#163828] font-medium hover:bg-[#F4F6F1] transition-all text-sm"
-              >
-                Close
-              </button>
-            </div>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-[#86EFAC] text-xs font-semibold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3 h-3" />
+            <span>Land Consultation Desk</span>
           </div>
-        ) : (
-          <div>
-            <div className="mb-6">
-              <span className="text-xs font-semibold tracking-widest text-[#2E6A4B] uppercase block mb-1">
-                Land Consultation
-              </span>
-              <h3 className="text-2xl font-bold tracking-tight text-[#163828]">
-                Enquire with AKARBHUMI
-              </h3>
-              <p className="text-[#57685D] text-xs sm:text-sm mt-1">
-                Share your requirements to receive objective land data and regional location briefings.
+
+          <h3 className="editorial-title text-2xl sm:text-3xl font-bold text-white leading-tight">
+            Book a Land Consultation
+          </h3>
+          <p className="text-xs sm:text-sm text-[#D1DCD5] mt-1 font-light">
+            Share your requirements for an objective, research-backed evaluation.
+          </p>
+        </div>
+
+        {/* Modal Body */}
+        <div className="p-6 sm:p-8 max-h-[80vh] overflow-y-auto">
+          {submitted ? (
+            <div className="text-center py-8 space-y-4">
+              <div className="w-16 h-16 bg-[#EBF3EE] text-[#2E6A4B] rounded-full flex items-center justify-center mx-auto shadow-inner">
+                <CheckCircle2 className="w-9 h-9" />
+              </div>
+              <h4 className="text-2xl font-bold text-[#163828]">Consultation Request Received</h4>
+              <p className="text-sm text-[#57685D] max-w-md mx-auto leading-relaxed">
+                Thank you, <strong>{formData.name}</strong>. Our land research & advisory cell will review your requirement and connect within 24 business hours.
               </p>
-            </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label className="block text-xs font-semibold text-[#163828] mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Enter your full name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-[#163828] mb-1">
-                    Mobile Number *
-                  </label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="+91 98765 43210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-[#163828] mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="name@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs font-semibold text-[#163828] mb-1">
-                    Preferred Location
-                  </label>
-                  <select
-                    value={formData.location}
-                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                  >
-                    <option value="Mangaon">Mangaon</option>
-                    <option value="Roha">Roha</option>
-                    <option value="Pali">Pali</option>
-                    <option value="Karjat">Karjat</option>
-                    <option value="Other">Other Western Maharashtra</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-[#163828] mb-1">
-                    Primary Purpose
-                  </label>
-                  <select
-                    value={formData.purpose}
-                    onChange={(e) => setFormData({ ...formData, purpose: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all"
-                  >
-                    <option value="Long-Term Land Holding">Long-Term Land Holding</option>
-                    <option value="Farmhouse / Country Retreat">Farmhouse / Country Retreat</option>
-                    <option value="Second Home">Second Home</option>
-                    <option value="Future Development Interest">Future Development Interest</option>
-                  </select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-[#163828] mb-1">
-                  Message / Specific Requirement
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder="Share any questions regarding locations, connectivity, or land advisory..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-3.5 py-2 rounded-lg border border-[#E3E8DF] bg-[#FBFBF9] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] text-sm text-[#163828] transition-all resize-none"
-                ></textarea>
-              </div>
-
-              <div className="pt-2 flex flex-col sm:flex-row gap-2">
-                <button
-                  type="submit"
-                  className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#163828] text-white font-medium hover:bg-[#0E241A] transition-all text-sm shadow-md"
-                >
-                  <Send className="w-4 h-4" />
-                  Submit Enquiry
-                </button>
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
                 <a
                   href={whatsappInquiryUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-[#25D366] text-[#163828] hover:bg-[#25D366]/10 font-medium transition-all text-sm"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#25D366] text-white text-xs font-bold hover:bg-[#1EBE5B] transition-all shadow-md"
                 >
-                  <MessageCircle className="w-4 h-4 text-[#25D366]" />
-                  WhatsApp
+                  <MessageCircle className="w-4 h-4" />
+                  <span>Instant WhatsApp Connect</span>
+                </a>
+                <button
+                  onClick={resetAndClose}
+                  className="w-full sm:w-auto px-6 py-3 rounded-xl border border-[#E3E8DF] text-[#163828] text-xs font-bold hover:bg-[#F4F6F1] transition-all cursor-pointer"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                  Consultation Service
+                </label>
+                <select
+                  value={formData.serviceRequired}
+                  onChange={(e) => setFormData({ ...formData, serviceRequired: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                >
+                  {SERVICES_DATA.map((srv) => (
+                    <option key={srv.id} value={srv.title}>
+                      {srv.title}
+                    </option>
+                  ))}
+                  <option value="General Land Advisory">General Land Advisory</option>
+                  <option value="Future Plotted Opportunities">Future Plotted Opportunities</option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                    Your Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    placeholder="e.g. Rahul Sharma"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                    Phone / WhatsApp Number *
+                  </label>
+                  <input
+                    type="tel"
+                    required
+                    placeholder="+91 98000 00000"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="name@company.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                    Area of Interest
+                  </label>
+                  <select
+                    value={formData.preferredLocation}
+                    onChange={(e) => setFormData({ ...formData, preferredLocation: e.target.value })}
+                    className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all"
+                  >
+                    <option value="Mangaon">Mangaon (NH 66 Corridor)</option>
+                    <option value="Roha">Roha (Kundalika Basin)</option>
+                    <option value="Pali">Pali (Expressway / Foothills)</option>
+                    <option value="Karjat">Karjat (Mumbai-Pune Belt)</option>
+                    <option value="Other Regional Zone">Other Growth Corridor</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold uppercase tracking-wider text-[#163828] mb-1.5">
+                  Brief Land Requirement or Query
+                </label>
+                <textarea
+                  rows={3}
+                  placeholder="Share details such as parcel size, purpose (agricultural, retreat, investment), or specific legal/zoning questions..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 rounded-xl border border-[#E3E8DF] bg-[#FBFBF9] text-sm text-[#163828] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#163828]/20 focus:border-[#163828] transition-all resize-none"
+                />
+              </div>
+
+              <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
+                <button
+                  type="submit"
+                  className="w-full sm:flex-1 py-3.5 px-6 rounded-xl bg-[#163828] hover:bg-[#0E241A] text-white text-xs font-bold tracking-wide transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
+                >
+                  <Send className="w-4 h-4" />
+                  <span>Submit Consultation Request</span>
+                </button>
+
+                <a
+                  href={whatsappInquiryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto px-5 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#1EBE5B] text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp Directly</span>
                 </a>
               </div>
+
+              <div className="flex items-center justify-center gap-2 pt-2 text-[11px] text-[#57685D]">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#2E6A4B]" />
+                <span>Strictly confidential advisory. No unsolicited marketing.</span>
+              </div>
             </form>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

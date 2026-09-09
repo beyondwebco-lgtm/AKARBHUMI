@@ -1,56 +1,65 @@
 import React from 'react';
-import { MessageCircle, ArrowRight, Compass } from 'lucide-react';
-import { SITE_CONTACT, getWhatsAppLink } from '../../data/siteData';
+import { MessageCircle, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
+import { getWhatsAppLink } from '../../data/siteData';
 
 interface FinalCTAProps {
-  onOpenEnquiry: () => void;
+  onOpenEnquiry?: () => void;
 }
 
 export default function FinalCTA({ onOpenEnquiry }: FinalCTAProps) {
-  const waUrl = getWhatsAppLink(
-    'Hello AKARBHUMI, I would like to talk about land opportunities and location insights.'
+  const whatsappUrl = getWhatsAppLink(
+    'Hello Aakar Bhumi, I would like to discuss my land requirement with your consultation team.'
   );
 
   return (
     <section className="py-24 sm:py-32 bg-[#0E241A] text-white relative overflow-hidden">
-      {/* Background Graphic Effect */}
-      <div className="absolute inset-0 z-0 opacity-15">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full border border-white/20 scale-125" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full border border-white/20" />
-      </div>
+      {/* Background Subtle Gradient & Mesh */}
+      <div className="absolute inset-0 bg-[radial-gradient(#2E6A4B_1px,transparent_1px)] [background-size:32px_32px] opacity-15 pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-[#86EFAC] text-xs font-bold tracking-widest uppercase">
-          <Compass className="w-3.5 h-3.5" />
-          Direct Land Advisory
-        </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-3xl mx-auto space-y-6">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-[#86EFAC] text-xs font-semibold tracking-wider uppercase border border-white/10">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Advisory Consultation</span>
+          </div>
 
-        <h2 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-          Let’s Talk About Land
-        </h2>
+          {/* Headline */}
+          <h2 className="editorial-title text-3xl sm:text-4xl lg:text-6xl font-bold tracking-tight text-white leading-[1.1]">
+            Discuss Your Land Requirement
+          </h2>
 
-        <p className="text-lg sm:text-xl text-[#D1DCD5] max-w-2xl mx-auto leading-relaxed font-light">
-          Have a location in mind? Let’s explore the possibilities with transparent regional information and objective data.
-        </p>
+          {/* Subtext */}
+          <p className="text-base sm:text-lg text-[#D1DCD5] font-light leading-relaxed">
+            Whether evaluating an upcoming land acquisition, planning agricultural acreage, or assessing long-term corridor potential, consult directly with our advisory desk.
+          </p>
 
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <button
-            onClick={onOpenEnquiry}
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white text-[#163828] font-bold text-base hover:bg-[#F4F6F1] transition-all shadow-xl transform hover:-translate-y-0.5"
-          >
-            Talk to Us
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          {/* CTAs */}
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={onOpenEnquiry}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#2E6A4B] hover:bg-[#24543B] text-white text-sm font-bold tracking-wide transition-all shadow-xl hover:shadow-2xl border border-[#86EFAC]/20 cursor-pointer"
+            >
+              <span>Book a Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
 
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#25D366] text-white font-bold text-base hover:bg-[#1EBE5B] transition-all shadow-xl"
-          >
-            <MessageCircle className="w-5 h-5 fill-current" />
-            WhatsApp ({SITE_CONTACT.whatsappDisplay})
-          </a>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-xl bg-white/10 hover:bg-white/20 text-white text-sm font-bold tracking-wide backdrop-blur-md border border-white/20 transition-all shadow-lg"
+            >
+              <MessageCircle className="w-4 h-4 text-[#86EFAC]" />
+              <span>Ask on WhatsApp</span>
+            </a>
+          </div>
+
+          {/* Reassurance */}
+          <div className="pt-8 flex items-center justify-center gap-2 text-xs text-[#A3B8AD]">
+            <ShieldCheck className="w-4 h-4 text-[#86EFAC]" />
+            <span>Confidential, objective guidance with zero high-pressure sales tactics.</span>
+          </div>
         </div>
       </div>
     </section>
