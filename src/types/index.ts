@@ -102,4 +102,6 @@ export interface SiteContactInfo {
   companyEmailPlaceholder: string;
   officeAddressPlaceholder: string;
   businessHoursPlaceholder: string;
+  facebookUrl?: string;
+  instagramUrl?: string;
 }

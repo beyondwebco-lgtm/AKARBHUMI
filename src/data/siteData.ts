@@ -3,13 +3,15 @@ import type { SiteContactInfo } from '../types';
 export const SITE_CONTACT: SiteContactInfo = {
   brandName: 'Aakar Bhumi',
   tagline: 'Shaping Land. Creating Value.',
-  whatsappNumber: '+91 70308 71292',
-  whatsappDisplay: '+91 70308 71292',
+  whatsappNumber: '+91 91851 59255',
+  whatsappDisplay: '+91 91851 59255',
   whatsappPrefill: 'Hello Aakar Bhumi, I would like to know more about land consultation.',
-  companyPhonePlaceholder: '+91 70308 71292',
+  companyPhonePlaceholder: '+91 91851 59255',
   companyEmailPlaceholder: 'advisory@akarbhumi.com',
   officeAddressPlaceholder: 'Aakar Bhumi Advisory Cell, Western Maharashtra Growth Corridor, India',
   businessHoursPlaceholder: 'Monday – Saturday: 9:30 AM – 6:30 PM (IST)',
+  facebookUrl: 'https://www.facebook.com/share/19fv7PSRHo/',
+  instagramUrl: 'https://www.instagram.com/akarbhumioffice?utm_source=qr&stkn=eXZiOHU4MTJmcDNi',
 };
 
 export const NAV_LINKS = [
