@@ -7,7 +7,7 @@ export const SITE_CONTACT: SiteContactInfo = {
   whatsappDisplay: '+91 91851 59255',
   whatsappPrefill: 'Hello Aakar Bhumi, I would like to know more about land consultation.',
   companyPhonePlaceholder: '+91 91851 59255',
-  companyEmailPlaceholder: 'advisory@akarbhumi.com',
+  companyEmailPlaceholder: 'hello@akarbhumi.com',
   officeAddressPlaceholder: 'Aakar Bhumi Advisory Cell, Western Maharashtra Growth Corridor, India',
   businessHoursPlaceholder: 'Monday – Saturday: 9:30 AM – 6:30 PM (IST)',
   facebookUrl: 'https://www.facebook.com/share/19fv7PSRHo/',
